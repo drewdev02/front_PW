@@ -1,13 +1,21 @@
 import {useState} from 'react';
+import axios, {HttpStatusCode} from "axios";
+import {loginUrl} from "../config.ts";
 
 function AuthForm() {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+    const [user, setUser] = useState('');
+    const [pass, setPass] = useState('');
 
-    const handleSubmit = (event: { preventDefault: () => void; }) => {
+    const handleSubmit = async (event: { preventDefault: () => void }) => {
         event.preventDefault();
-        console.log('Usuario:', username);
-        console.log('Contraseña:', password);
+        const res = await axios.post(loginUrl, {
+            username: user,
+            password: pass,
+        })
+        console.debug(res)
+        if (res.status === HttpStatusCode.Ok) {
+            console.info("usuario autenticado correctamente");
+        }
     };
 
     return (
@@ -18,8 +26,8 @@ function AuthForm() {
                     <input
                         type="text"
                         id="username"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
+                        value={user}
+                        onChange={(e) => setUser(e.target.value)}
                         className="w-full px-3 py-2 bg-gray-700 border rounded-lg text-white"
                     />
                 </div>
@@ -28,8 +36,8 @@ function AuthForm() {
                     <input
                         type="password"
                         id="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        value={pass}
+                        onChange={(e) => setPass(e.target.value)}
                         className="w-full px-3 py-2 bg-gray-700 border rounded-lg text-white"
                     />
                 </div>
