@@ -11,3 +11,9 @@ export type MenuOptions = {
     label: string;
     link: string;
 }
+export type Direccion = {
+    provincia: string,
+    municipio: string,
+    calle: string,
+    numero: string
+}

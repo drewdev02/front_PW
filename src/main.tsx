@@ -8,6 +8,7 @@ import TrabajadorDocente from "./pages/trabajadorDocente.tsx";
 import TrabajadorNoDocente from "./pages/trabajadorNoDocente.tsx";
 import Menu from "./pages/component/menu.tsx";
 import {MenuOptions} from "./types.ts";
+import ListaDatos from "./pages/component/ListaDatos.tsx";
 
 const menuData: Array<MenuOptions> = [
     {
@@ -29,6 +30,10 @@ const menuData: Array<MenuOptions> = [
         id: 'trabajadornodocente',
         label: 'Crear trabajador no docente',
         link: '/trabajadornodocente'
+    }, {
+        id: 'listar',
+        label: 'listar trabajador',
+        link: '/listar'
     }
 ]
 
@@ -52,7 +57,10 @@ const router = createBrowserRouter([
     }, {
         path: "/trabajadornodocente",
         element: <TrabajadorNoDocente/>,
-    },
+    }, {
+        path: "/listar",
+        element: <ListaDatos/>
+    }
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
