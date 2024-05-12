@@ -2,8 +2,10 @@ import {useState} from 'react';
 import axios, {HttpStatusCode} from "axios";
 import {registerUrl} from "../config.ts";
 import CustomForm from "./component/customForm.tsx";
-import {Data} from "../types.ts";
 
+
+import {Data} from "../types.ts";
+import Popup from "./component/Popup.tsx";
 
 function Trabajador() {
     const [nombre, setNombre] = useState('');
@@ -12,6 +14,8 @@ function Trabajador() {
     const [municipio, setMunicipio] = useState('');
     const [calle, setCalle] = useState('');
     const [numero, setNumero] = useState('');
+    const [mostrarPopup, setMostrarPopup] = useState(false);
+    const [popupMessage, setPopupMessage] = useState('');
 
     const data: Array<Data> = [
         {
@@ -54,28 +58,49 @@ function Trabajador() {
 
     const handleSubmit = async (event: { preventDefault: () => void; }) => {
         event.preventDefault();
-        const res = await axios.post(registerUrl, {
-                nombre: nombre,
-                carneIdentidad: carneIdentidad,
-                direccion: [
-                    {
-                        provincia: provincia,
-                        municipio: municipio,
-                        calle: calle,
-                        numero: numero,
-                    }
-                ],
-                tipo: "normal",
+        try {
+            const res = await axios.post(registerUrl, {
+                    nombre: nombre,
+                    carneIdentidad: carneIdentidad,
+                    direccion: [
+                        {
+                            provincia: provincia,
+                            municipio: municipio,
+                            calle: calle,
+                            numero: numero,
+                        }
+                    ],
+                    tipo: "normal",
+                }
+            );
+            console.debug(res);
+            if (res.status === HttpStatusCode.Ok) {
+                console.info("Trabajador creado correctamente")
+                handleOpenPopup("¡Trabajador creado correctamente!")
             }
-        );
-        console.debug(res);
-        if (res.status === HttpStatusCode.Ok) {
-            console.info("Trabajador creado correctamente")
+        } catch (e) {
+            console.error(e)
+            handleOpenPopup("Error al crear trabajador")
         }
+    }
+    const handleClosePopup = () => {
+        setMostrarPopup(false);
+    };
+    const handleOpenPopup = (messege: string) => {
+        setMostrarPopup(true);
+        setPopupMessage(messege)
     }
 
     return (
-        <CustomForm handleSubmit={handleSubmit} data={data}/>
+        <>
+            <CustomForm handleSubmit={handleSubmit} data={data}/>
+            <Popup
+                isOpen={mostrarPopup}
+                title={"¡Registro completado!"}
+                body={popupMessage}
+                onClose={handleClosePopup}/>
+        </>
+
     );
 }
 
