@@ -4,6 +4,8 @@ import './input.css'
 import {createBrowserRouter, RouterProvider,} from "react-router-dom";
 import AuthForm from "./pages/login.tsx";
 import Trabajador from "./pages/trabajador.tsx";
+import TrabajadorDocente from "./pages/trabajadorDocente.tsx";
+import TrabajadorNoDocente from "./pages/trabajadorNoDocente.tsx";
 
 
 const router = createBrowserRouter([
@@ -14,6 +16,13 @@ const router = createBrowserRouter([
     {
         path: "/trabajador",
         element: <Trabajador/>,
+    },
+    {
+        path: "/trabajadordocente",
+        element: <TrabajadorDocente/>,
+    }, {
+        path: "/trabajadornodocente",
+        element: <TrabajadorNoDocente/>,
     }
 ]);
 
