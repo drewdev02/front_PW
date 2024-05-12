@@ -22,7 +22,7 @@ function TrabajadorNoDocente() {
         },
         {
             id: "carneIdentidad",
-            label: "carne de Identidad",
+            label: "Carnet de Identidad",
             value: carneIdentidad,
             onChange: e => setCarneIdentidad(e.target.value),
         },

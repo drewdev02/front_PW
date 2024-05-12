@@ -15,38 +15,38 @@ function Trabajador() {
 
     const data: Array<Data> = [
         {
-            id: "nombre",
-            label: "nombre",
+            id: "ombre",
+            label: "Nombre",
             value: nombre,
             onChange: e => setNombre(e.target.value),
         },
         {
             id: "carneIdentidad",
-            label: "carne de Identidad",
+            label: "Carnet de Identidad",
             value: carneIdentidad,
             onChange: e => setCarneIdentidad(e.target.value),
         },
         {
             id: "provincia",
-            label: "provincia",
+            label: "Provincia",
             value: provincia,
             onChange: e => setProvincia(e.target.value),
         },
         {
             id: "municipio",
-            label: "municipio",
+            label: "Municipio",
             value: municipio,
             onChange: e => setMunicipio(e.target.value),
         },
         {
-            id: "callee",
-            label: "calle",
+            id: "calle",
+            label: "Calle",
             value: calle,
             onChange: e => setCalle(e.target.value),
         },
         {
             id: "numero",
-            label: "numero",
+            label: "Numero",
             value: numero,
             onChange: e => setNumero(e.target.value),
         },

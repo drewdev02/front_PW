@@ -1,16 +1,18 @@
 import {useEffect, useState} from "react";
 import axios, {HttpStatusCode} from "axios";
-import {trabajadorDocenteUrl} from "../../config.ts";
 import DireccionComponet from "./DireccionComponet.tsx";
 
+export interface Props {
+    url: string;
+}
 
-function ListaDatos() {
+function ListaDatos({url}: Props) {
     const [data, setData] = useState<Array<any> | null>(null);
 
 
     useEffect(() => {
         const fetchData = async () => {
-            const res = await axios.get(trabajadorDocenteUrl);
+            const res = await axios.get(url);
             if (res.status === HttpStatusCode.Ok) {
                 console.debug("datos obtenidos correctamente")
                 //console.debug(res, res)
