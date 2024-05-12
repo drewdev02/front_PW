@@ -1,6 +1,8 @@
 import {useState} from 'react';
 import axios, {HttpStatusCode} from "axios";
 import {registerUrl} from "../config.ts";
+import {Data} from "../types.ts";
+import CustomForm from "./component/customForm.tsx";
 
 function TrabajadorNoDocente() {
     const [nombre, setNombre] = useState('');
@@ -11,6 +13,56 @@ function TrabajadorNoDocente() {
     const [numero, setNumero] = useState('');
     const [nivelEscolaridad, setNivelEscolaridad] = useState('');
     const [ocupacion, setOcupacion] = useState('');
+    const data: Array<Data> = [
+        {
+            id: "nombre",
+            label: "Nombre",
+            value: nombre,
+            onChange: e => setNombre(e.target.value),
+        },
+        {
+            id: "carneIdentidad",
+            label: "carne de Identidad",
+            value: carneIdentidad,
+            onChange: e => setCarneIdentidad(e.target.value),
+        },
+        {
+            id: "provincia",
+            label: "Provincia",
+            value: provincia,
+            onChange: e => setProvincia(e.target.value),
+        },
+        {
+            id: "municipio",
+            label: "Municipio",
+            value: municipio,
+            onChange: e => setMunicipio(e.target.value),
+        },
+        {
+            id: "callee",
+            label: "Calle",
+            value: calle,
+            onChange: e => setCalle(e.target.value),
+        },
+        {
+            id: "numero",
+            label: "Numero",
+            value: numero,
+            onChange: e => setNumero(e.target.value),
+        },
+        {
+            id: "NivelEscolaridad",
+            label: "Nivel de Escolaridad",
+            value: nivelEscolaridad,
+            onChange: e => setNivelEscolaridad(e.target.value),
+        },
+        {
+            id: "Ocupacion",
+            label: "Ocupacion",
+            value: ocupacion,
+            onChange: e => setOcupacion(e.target.value),
+        }
+    ]
 
     const handleSubmit = async (event: { preventDefault: () => void; }) => {
         event.preventDefault();
@@ -37,93 +89,7 @@ function TrabajadorNoDocente() {
     }
 
     return (
-        <div className="flex justify-center items-center h-screen bg-gray-900 text-white">
-            <form onSubmit={handleSubmit} className="bg-gray-800 p-8 rounded-lg shadow-lg">
-                <div className="mb-4">
-                    <label htmlFor="nombre" className="block mb-2">Nombre:</label>
-                    <input
-                        type="text"
-                        id="nombre"
-                        value={nombre}
-                        onChange={(e) => setNombre(e.target.value)}
-                        className="w-full px-3 py-2 bg-gray-700 border rounded-lg text-white"
-                    />
-                </div>
-                <div className="mb-4">
-                    <label htmlFor="carneIdentidad" className="block mb-2">Carné de Identidad:</label>
-                    <input
-                        type="text"
-                        id="carneIdentidad"
-                        value={carneIdentidad}
-                        onChange={(e) => setCarneIdentidad(e.target.value)}
-                        className="w-full px-3 py-2 bg-gray-700 border rounded-lg text-white"
-                    />
-                </div>
-                <div className="mb-4">
-                    <label htmlFor="provincia" className="block mb-2">Provincia:</label>
-                    <input
-                        type="text"
-                        id="provincia"
-                        value={provincia}
-                        onChange={(e) => setProvincia(e.target.value)}
-                        className="w-full px-3 py-2 bg-gray-700 border rounded-lg text-white"
-                    />
-                </div>
-                <div className="mb-4">
-                    <label htmlFor="municipio" className="block mb-2">Municipio:</label>
-                    <input
-                        type="text"
-                        id="municipio"
-                        value={municipio}
-                        onChange={(e) => setMunicipio(e.target.value)}
-                        className="w-full px-3 py-2 bg-gray-700 border rounded-lg text-white"
-                    />
-                </div>
-                <div className="mb-4">
-                    <label htmlFor="calle" className="block mb-2">Calle:</label>
-                    <input
-                        type="text"
-                        id="calle"
-                        value={calle}
-                        onChange={(e) => setCalle(e.target.value)}
-                        className="w-full px-3 py-2 bg-gray-700 border rounded-lg text-white"
-                    />
-                </div>
-                <div className="mb-4">
-                    <label htmlFor="numero" className="block mb-2">Número:</label>
-                    <input
-                        type="text"
-                        id="numero"
-                        value={numero}
-                        onChange={(e) => setNumero(e.target.value)}
-                        className="w-full px-3 py-2 bg-gray-700 border rounded-lg text-white"
-                    />
-                </div>
-                <div className="mb-4">
-                    <label htmlFor="NivelEscolaridad" className="block mb-2">Nivel Escolaridad:</label>
-                    <input
-                        type="text"
-                        id="numero"
-                        value={nivelEscolaridad}
-                        onChange={(e) => setNivelEscolaridad(e.target.value)}
-                        className="w-full px-3 py-2 bg-gray-700 border rounded-lg text-white"
-                    />
-                </div>
-                <div className="mb-4">
-                    <label htmlFor="Ocupacion" className="block mb-2">Ocupacion:</label>
-                    <input
-                        type="text"
-                        id="numero"
-                        value={ocupacion}
-                        onChange={(e) => setOcupacion(e.target.value)}
-                        className="w-full px-3 py-2 bg-gray-700 border rounded-lg text-white"
-                    />
-                </div>
-                <button type="submit" className="w-full py-2 px-4 bg-blue-500 hover:bg-blue-600 rounded-lg">Guardar
-                    datos
-                </button>
-            </form>
-        </div>
+        <CustomForm handleSubmit={handleSubmit} data={data}/>
     );
 }
 

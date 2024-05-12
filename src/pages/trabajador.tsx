@@ -1,7 +1,9 @@
 import {useState} from 'react';
 import axios, {HttpStatusCode} from "axios";
 import {registerUrl} from "../config.ts";
-import CustomInput from "./component/CustomInput.tsx";
+import CustomForm from "./component/customForm.tsx";
+import {Data} from "../types.ts";
+
 
 function Trabajador() {
     const [nombre, setNombre] = useState('');
@@ -11,7 +13,7 @@ function Trabajador() {
     const [calle, setCalle] = useState('');
     const [numero, setNumero] = useState('');
 
-    const data = [
+    const data: Array<Data> = [
         {
             id: "nombre",
             label: "nombre",
@@ -20,7 +22,7 @@ function Trabajador() {
         },
         {
             id: "carneIdentidad",
-            label: "carneIdentidad",
+            label: "carne de Identidad",
             value: carneIdentidad,
             onChange: e => setCarneIdentidad(e.target.value),
         },
@@ -37,7 +39,7 @@ function Trabajador() {
             onChange: e => setMunicipio(e.target.value),
         },
         {
-            id: "calle",
+            id: "callee",
             label: "calle",
             value: calle,
             onChange: e => setCalle(e.target.value),
@@ -73,20 +75,7 @@ function Trabajador() {
     }
 
     return (
-        <div className="flex justify-center items-center h-screen bg-gray-900 text-white">
-            <form onSubmit={handleSubmit} className="bg-gray-800 p-8 rounded-lg shadow-lg">
-                {data.map(e => <CustomInput
-                        id={e.id}
-                        value={e.value}
-                        onChange={e.onChange}
-                        label={e.label}
-                    />
-                )}
-                <button type="submit" className="w-full py-2 px-4 bg-blue-500 hover:bg-blue-600 rounded-lg">Guardar
-                    datos
-                </button>
-            </form>
-        </div>
+        <CustomForm handleSubmit={handleSubmit} data={data}/>
     );
 }
 
